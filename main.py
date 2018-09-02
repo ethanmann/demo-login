@@ -24,7 +24,7 @@ class MainPageHandler(webapp2.RequestHandler):
 
         if type == "login":
             logging.info("login")
-            uname = self.request.get('email')
+            email = self.request.get('email')
             psw = self.request.get('psw')
             remember = self.request.get('remember')
             #plainTextResponse(self, "LOGIN QUERY: %s, %s, %s" % (uname, psw, remember))
@@ -34,6 +34,10 @@ class MainPageHandler(webapp2.RequestHandler):
 
             if len(results) == 0:
                 plainTextResponse(self, "The combination of username and password does not exist")
+
+            else:
+                user = results[0]
+                plainTextResponse(self, "You have logged in! User email is %s" % (user.email))
 
         elif type == "signup":
             logging.info("signup")
@@ -52,7 +56,7 @@ class MainPageHandler(webapp2.RequestHandler):
                 if (psw == psw_repeat):
                     remember = self.request.get('remember')
 
-                    newUser = User(email=email, password=psw)
+                    newUser = database.User(email=email, password=psw)
                     newUser.put()
 
                     plainTextResponse(self, "You have successfully signed up!")
