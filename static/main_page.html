@@ -14,9 +14,9 @@
 <button id="openSignupModal" style="width:auto;">Sign Up</button>
 
 <div id="loginModal" class="modal">
-
+  <span class="close closeLoginModal" title="Close Modal">&times;</span>
   <form class="modal-content1 animate" action="post">
-    <span class="close closeLoginModal" title="Close Modal">&times;</span>
+    <input type="hidden" name="type" value="login">
 
     <!-- <form class="modal-content1 animate1" action="post">
       <div class="imgcontainer1">
@@ -50,6 +50,7 @@
 <div id="signupModal" class="modal">
   <span class="close closeSignupModal" title="Close Modal">&times;</span>
   <form class="modal-content" action="post">
+    <input type="hidden" name="type" value="signup">
     <div class="container">
       <h1>Sign Up</h1>
       <p>Please fill in this form to create an account.</p>

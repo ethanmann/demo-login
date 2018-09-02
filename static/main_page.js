@@ -1,20 +1,35 @@
 window.onload = main;
+var inputBoxes;
 
 function main(){
+  inputBoxes = document.querySelectorAll("input");
   var signupModal = signupScript();
   var loginModal = loginScript();
   windowClick(signupModal, loginModal);
 }
 
+function clearInput(){
+  var inputBoxesArray = Array.from(inputBoxes);
+
+  // Clears non-hidden input boxes
+  inputBoxesArray.forEach(function(element){
+    if (element.type != "hidden"){
+      element.value="";
+    }
+  });
+}
+
 function windowClick(signupModal, loginModal){
-  // When the user clicks anywhere outside of the modal, close it
+  // When the user clicks anywhere outside of the modal, close it + clear input
   window.onclick = function(event) {
       if (event.target == signupModal) {
           signupModal.style.display = "none";
+          clearInput();
       }
 
       if (event.target == loginModal) {
           loginModal.style.display = "none";
+          clearInput();
       }
   }
 }
@@ -28,9 +43,9 @@ function signupScript(){
   // Turn closeModal into an Array
   var closeSignupModalArray = Array.from(closeSignupModal);
 
-  // When the user clicks on close/cancel, close the modal
+  // When the user clicks on close/cancel, close the modal + clear input
   closeSignupModalArray.forEach(function(element){
-    element.onclick = () => {signupModal.style.display='none';}
+    element.onclick = () => {signupModal.style.display='none'; clearInput();}
   });
 
   // When the user clicks on login, open the modal
@@ -50,7 +65,7 @@ function loginScript(){
 
   // When the user clicks on close/cancel, close the modal
   closeLoginModalArray.forEach(function(element){
-    element.onclick = () => {loginModal.style.display='none';}
+    element.onclick = () => {loginModal.style.display='none'; clearInput();}
   });
 
   // When the user clicks on login, open the modal
