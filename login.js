@@ -22,5 +22,5 @@ function main(){
   });
 
   // When the user clicks on login, open the modal
-  openModal.onclick = () => {modal.style.display='block'};
+  openModal.onclick = () => {modal.style.display='block';}
 }
