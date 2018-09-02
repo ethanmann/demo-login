@@ -2,9 +2,9 @@ window.onload = main;
 
 function main(){
   // Get the modal id, closeModal class items, and openModal id
-  var modal = document.getElementById('modal');
-  var closeModal = document.getElementsByClassName('closeModal');
-  var openModal = document.getElementById('openModal');
+  var modal = document.getElementById('signupModal');
+  var closeModal = document.getElementsByClassName('closeSignupModal');
+  var openModal = document.getElementById('openSignupModal');
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
