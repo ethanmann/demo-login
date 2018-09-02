@@ -38,7 +38,7 @@ class MainPageHandler(webapp2.RequestHandler):
 
             if len(results) == 0:
                 #plainTextResponse(self, "The combination of username and password does not exist")
-                homePageMessage(self, "The combination of username and password does not exist. Try again.")
+                homePageMessage(self, "Those credentials were invalid. Try again.")
 
             else:
                 user = results[0]
@@ -70,7 +70,7 @@ class MainPageHandler(webapp2.RequestHandler):
                     homePageMessage(self, "You have successfully signed up!")
                 else:
                     #plainTextResponse(self, "The passwords you entered are not the same.")
-                    homePageMessage(self, "The passwords you entered are not the same. Try again.")
+                    homePageMessage(self, "Your passwords didn't match. Try again.")
 
 
 app = webapp2.WSGIApplication([
