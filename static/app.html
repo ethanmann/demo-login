@@ -1,23 +1,59 @@
+<!DOCTYPE html>
 <html>
 <head>
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="static/login.css">
+  <link rel="stylesheet" href="static/signup.css">
+  <script src="static/main_page.js"></script>
+
+
+
+<title>Home Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+    background-image: url('static/forestbridge.jpg');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+</style>
 </head>
 <body>
-  <h1>THIS IS THE APP</h1>
-  <h2>IF YOU SEE THIS THEN YOU'VE LOGGED IN RIGHT!!!</h2>
-  <h3>USER EMAIL: {{email}}</h3>
-  <h3>USER WORDS:</h3>
-  <ol>
-  {% for word in listOfWords %}
-    <li>{{word}}</li>
-  {% endfor %}
-  </ol>
-  <br>
-  <form method="post">
-    <div>NEW WORD: <input type="text" name="new_word"></input></div>
-    <div>CLEAR ALL: <input type="checkbox" id="clear" name="clear" value="YES" /></div>
-    <div><input type="submit"></div>
-  </form>
-  <br>
-  <h1>CLICK <a href="/logout">HERE</a> TO LOGOUT</h1>
+
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+  <div class="w3-display-topleft w3-padding-large w3-xlarge">
+    <a href="/logout">Log Out {{email}}</a>
+  </div>
+  <div class="w3-display-middle">
+    <h1 class="w3-jumbo w3-animate-top w3-center">YOUR SAVED WORDS</h1>
+    <hr class="w3-border-grey" style="margin:auto;width:40%">
+    <br>
+    <div class="w3-large w3-center">
+      <ol>
+      {% for word in listOfWords %}
+        <li>{{word}}</li>
+      {% endfor %}
+      </ol>
+      <br>
+      <form method="post">
+        <div>NEW WORD: <input type="text" name="new_word"></input></div>
+        <div>CLEAR ALL: <input type="checkbox" id="clear" name="clear" value="YES" /></div>
+        <div><input type="submit"></div>
+      </form>
+    </div>
+  </div>
+  <div class="w3-display-bottomleft w3-padding-large">
+    Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a>
+  </div>
+</div>
+
 </body>
 </html>

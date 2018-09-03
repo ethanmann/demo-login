@@ -40,12 +40,20 @@ class TermsPrivacyHandler(webapp2.RequestHandler):
 
 class MainPageHandler(webapp2.RequestHandler):
     def get(self):
-        if self.request.cookies.get('login_cookie') == "":
+        cookie_value = self.request.cookies.get('login_cookie')
+        if cookie_value == "":
             homePageMessage(self, "", "")
         else:
+            all_users = database.User.query().fetch()
+            user_entity = None
+            for user in all_users:
+                if str(user.key) == cookie_value:
+                    user_entity = user
+                    break
+
             self.response.headers['Content-Type'] = 'text/html'
             template = jinja_env.get_template('static/main_page_cookie.html')
-            self.response.write(template.render())
+            self.response.write(template.render({"email": user_entity.email}))
 
     def post(self):
         type = str(self.request.get('type'))
@@ -107,6 +115,10 @@ class MainPageHandler(webapp2.RequestHandler):
                     #plainTextResponse(self, "You have successfully signed up!")
                     #homePageMessage(self, "", "You have successfully signed up!")
                     #successMessage(self, "SIGN UP")
+
+                    import time
+                    time.sleep(1)
+
                     self.response.headers['Content-Type'] = 'text/html'
                     template = jinja_env.get_template('static/login.html')
                     self.response.write(template.render())
@@ -136,7 +148,9 @@ class AppHandler(webapp2.RequestHandler):
 
         logging.info(user_entity)
 
-        data = {"listOfWords":user_entity.listOfWords, "email":user_entity.email}
+        data = {}
+        data["listOfWords"] = user_entity.listOfWords
+        data["email"] = user_entity.email
 
         #WILL NEED TO QUERY DATASTORE TO GET THE COOKIE-KEY
         self.response.headers['Content-Type'] = 'text/html'
