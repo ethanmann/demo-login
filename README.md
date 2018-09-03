@@ -13,6 +13,7 @@ https://website-login-demo.appspot.com/
 # progress + next steps
 <ol>
 <li>Forms and post method - DONE</li>
+<li>Password bullet points instead of char - DONE</li>
 <li>Site layout/structure + datastore - DONE</li>
 <li>Terms & Privacy page - DONE</li>
 <li>Server-generated Error checking - DONE</li>
@@ -24,7 +25,6 @@ https://website-login-demo.appspot.com/
 <li>Form data carry through after failed attempt</li>
 <li>JS Client-generated Error checking (include password = password???)</li>
 <li>JS Client-generated Error alerts</li>
-<li>Password bullet points instead of char</li>
 <li>Password requirements -> length, etc.</li>
 <li>User Account page(s)</li>
 <li>Deploy to Cloud</li>
