@@ -19,6 +19,13 @@ def homePageMessage(self, message):
     template = jinja_env.get_template('static/main_page.html')
     self.response.write(template.render(data))
 
+class TermsPrivacyHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
+        template = jinja_env.get_template('static/terms_privacy.html')
+        self.response.write(template.render())
+
+
 class MainPageHandler(webapp2.RequestHandler):
     def get(self):
         homePageMessage(self, "WELCOME")
@@ -75,4 +82,5 @@ class MainPageHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainPageHandler),
+    ('/terms_privacy', TermsPrivacyHandler)
 ], debug=True)
