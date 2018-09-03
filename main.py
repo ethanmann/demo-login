@@ -41,7 +41,7 @@ class TermsPrivacyHandler(webapp2.RequestHandler):
 class MainPageHandler(webapp2.RequestHandler):
     def get(self):
         cookie_value = self.request.cookies.get('login_cookie')
-        if cookie_value == "":
+        if cookie_value == "" or cookie_value == None:
             homePageMessage(self, "", "")
         else:
             all_users = database.User.query().fetch()
