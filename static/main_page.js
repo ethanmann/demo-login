@@ -12,6 +12,8 @@ var loginModal;
 
 var signupForm;
 var loginForm;
+var signupFormSubmit;
+var loginFormSubmit;
 
 function main(){
   loginMessageDefault = "Please fill in this form to login.";
@@ -22,6 +24,8 @@ function main(){
 
   loginForm = document.getElementById('loginForm');
   signupForm = document.getElementById('signupForm');
+  loginFormSubmit = document.getElementById('loginFormSubmit');
+  signupFormSubmit = document.getElementById('signupFormSubmit');
 
   inputBoxes = document.querySelectorAll("input");
   signupModal = signupScript();
@@ -40,14 +44,27 @@ function main(){
   window.onkeydown = (e) => {
     if (e.keyCode == 13){
       if (loginModal.style.display == 'block'){
-        loginForm.submit();
+        loginFormSubmit.click();
+        // alert("LOGIN SUBMIT");
       }
       if (signupModal.style.display == 'block'){
-        signupForm.submit();
+        signupFormSubmit.click();
+        // alert("SIGN UP SUBMIT");
       }
     }
-  });
+  }
 }
+
+// //https://stackoverflow.com/questions/2705583/how-to-simulate-a-click-with-javascript/2706236#2706236
+// function eventFire(el, etype){
+//   if (el.fireEvent) {
+//     el.fireEvent('on' + etype);
+//   } else {
+//     var evObj = document.createEvent('Events');
+//     evObj.initEvent(etype, true, false);
+//     el.dispatchEvent(evObj);
+//   }
+// }
 
 function clearInput(){
   var inputBoxesArray = Array.from(inputBoxes);

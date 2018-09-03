@@ -12,11 +12,15 @@ Home Page Layout: https://www.w3schools.com/w3css/tryw3css_templates_coming_soon
 <li>Forms and post method - DONE</li>
 <li>Site layout/structure + datastore - DONE</li>
 <li>Terms & Privacy page - DONE</li>
-<li>Error checking - DONE</li>
-<li>Error alerts - DONE</li>
-<li>Form submit on enter - DONE</li>
+<li>Server-generated Error checking - DONE</li>
+<li>Server-generated Error alerts - DONE</li>
+<li>HTML5-generated error checking + alerts - DONE</li>
+<li>Form submit on enter (without HTML5 errors checking) - DONE</li>
+<li>Form submit on enter (with HTML5 errors checking) - DONE</li>
 <li>Success page - DONE</li>
 <li>Form data carry through after failed attempt</li>
+<li>JS Client-generated Error checking (include password = password???)</li>
+<li>JS Client-generated Error alerts</li>
 <li>Password bullet points instead of char</li>
 <li>Password requirements -> length, etc.</li>
 <li>User Account page(s)</li>
