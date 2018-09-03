@@ -28,7 +28,7 @@ class TermsPrivacyHandler(webapp2.RequestHandler):
 
 class MainPageHandler(webapp2.RequestHandler):
     def get(self):
-        homePageMessage(self, "WELCOME")
+        homePageMessage(self, "")
 
     def post(self):
         type = str(self.request.get('type'))

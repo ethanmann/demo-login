@@ -2,6 +2,12 @@ window.onload = main;
 var inputBoxes;
 
 function main(){
+  var hiddenAlert = document.getElementById('alertMessage');
+  if (hiddenAlert.value != ""){
+    alert(hiddenAlert.value);
+    hiddenAlert.value = "";
+  }
+
   inputBoxes = document.querySelectorAll("input");
   var signupModal = signupScript();
   var loginModal = loginScript();
