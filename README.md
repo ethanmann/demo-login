@@ -37,6 +37,8 @@ https://website-login-demo.appspot.com/
 
 # tangent
 <ol>
-  <li>Storing Cookie on user's computer - DONE</li>
+  <li>Storing Cookie on user's computer after signup or login - DONE</li>
   <li>Requiring Cookie to view APP page - DONE</li>
+  <li>App page - DONE</li>
+  <li>Log out page that clears cookie value - DONE</li>
 </ol>

@@ -173,8 +173,8 @@ class LogoutHandler(webapp2.RequestHandler):
         #cookie_value = self.request.cookies.get('login_cookie')
         #logging.info(cookie_value)
 
-        # self.response.delete_cookie('login_cookie')
         self.response.set_cookie('login_cookie', value="", path="/")
+        #self.response.delete_cookie('login_cookie')
 
         # if self.request.cookies.get('login_cookie') == None or self.request.cookies.get('login_cookie') == "":
         #     return webapp2.redirect('/')
