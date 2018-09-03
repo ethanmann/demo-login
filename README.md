@@ -41,4 +41,5 @@ https://website-login-demo.appspot.com/
   <li>Requiring Cookie to view APP page - DONE</li>
   <li>App page - DONE</li>
   <li>Log out page that clears cookie value - DONE</li>
+  <li>Log out page that goes home - DONE</li>
 </ol>
