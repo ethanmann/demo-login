@@ -34,3 +34,9 @@ https://website-login-demo.appspot.com/
 <li>Forgot Password</li>
 <li>More TBD</li>
 </ol>
+
+# tangent
+<ol>
+  <li>Storing Cookie on user's computer - DONE</li>
+  <li>Requiring Cookie to view APP page - DONE</li>
+</ol>

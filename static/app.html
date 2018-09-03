@@ -1,0 +1,23 @@
+<html>
+<head>
+</head>
+<body>
+  <h1>THIS IS THE APP</h1>
+  <h2>IF YOU SEE THIS THEN YOU'VE LOGGED IN RIGHT!!!</h2>
+  <h3>USER EMAIL: {{email}}</h3>
+  <h3>USER WORDS:</h3>
+  <ol>
+  {% for word in listOfWords %}
+    <li>{{word}}</li>
+  {% endfor %}
+  </ol>
+  <br>
+  <form method="post">
+    <div>NEW WORD: <input type="text" name="new_word"></input></div>
+    <div>CLEAR ALL: <input type="checkbox" id="clear" name="clear" value="YES" /></div>
+    <div><input type="submit"></div>
+  </form>
+  <br>
+  <h1>CLICK <a href="/logout">HERE</a> TO LOGOUT</h1>
+</body>
+</html>

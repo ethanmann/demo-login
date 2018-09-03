@@ -61,6 +61,11 @@ class MainPageHandler(webapp2.RequestHandler):
 
             else:
                 user = results[0]
+
+                # SEE COOKIE COMMENTS BELOW FOR SIGNUP SECTION
+                datastore_key = str(user.put())
+                self.response.set_cookie('login_cookie', value=datastore_key, path="/")
+
                 #plainTextResponse(self, "You have logged in! User email is %s" % (user.email))
                 #homePageMessage(self, "", "")
                 successMessage(self, "LOGIN")
@@ -83,8 +88,13 @@ class MainPageHandler(webapp2.RequestHandler):
                 if (psw == psw_repeat):
                     remember = self.request.get('remember')
 
-                    newUser = database.User(email=email, password=psw)
-                    newUser.put()
+                    newUser = database.User(email=email, password=psw, listOfWords=[])
+                    datastore_key = str(newUser.put())
+                    #https://cloud.google.com/appengine/docs/standard/python/ndb/creating-entities
+
+                    #self.response.set_cookie('login_cookie', key, path='/app',domain='website-login-demo.appspot.com', secure=True)
+                    self.response.set_cookie('login_cookie', value=datastore_key, path="/")
+                    #https://webapp2.readthedocs.io/en/latest/guide/response.html
 
                     #plainTextResponse(self, "You have successfully signed up!")
                     #homePageMessage(self, "", "You have successfully signed up!")
@@ -96,7 +106,85 @@ class MainPageHandler(webapp2.RequestHandler):
                     homePageMessage(self, "", "Your passwords didn't match. Try again.")
 
 
+class AppHandler(webapp2.RequestHandler):
+    def get(self):
+        #https://webapp2.readthedocs.io/en/latest/guide/request.html
+        cookie_value = self.request.cookies.get('login_cookie')
+        logging.info(cookie_value)
+
+        if cookie_value == None or cookie_value == "":
+            return webapp2.redirect('/')
+
+        #https://cloud.google.com/appengine/docs/standard/python/ndb/creating-entities
+        all_users = database.User.query().fetch()
+        user_entity = None
+        for user in all_users:
+            logging.info(str(user.key))
+            if str(user.key) == cookie_value:
+                user_entity = user
+                break
+
+        logging.info(user_entity)
+
+        data = {"listOfWords":user_entity.listOfWords, "email":user_entity.email}
+
+        #WILL NEED TO QUERY DATASTORE TO GET THE COOKIE-KEY
+        self.response.headers['Content-Type'] = 'text/html'
+        template = jinja_env.get_template('static/app.html')
+        self.response.write(template.render(data))
+
+    def post(self):
+        new_word = self.request.get('new_word')
+        clear = self.request.get('clear')
+
+        cookie_value = self.request.cookies.get('login_cookie')
+        logging.info(cookie_value)
+
+        all_users = database.User.query().fetch()
+        user_entity = None
+        for user in all_users:
+            if str(user.key) == cookie_value:
+                user_entity = user
+                break
+
+        if clear == "YES":
+            user_entity.listOfWords = []
+            user_entity.put()
+
+        else:
+            user_entity.listOfWords.append(new_word)
+            user_entity.put()
+
+        AppHandler.get(self)
+
+
+class LogoutHandler(webapp2.RequestHandler):
+    def get(self):
+        logging.info("LOGOUT GET")
+        LogoutHandler.post(self)
+        #can't logout on the get method
+
+        logging.info("MADE IT PAST POST BACK TO GET")
+        return webapp2.redirect('/')
+
+    def post(self):
+        logging.info("LOGOUT POST")
+        #https://webapp2.readthedocs.io/en/latest/guide/request.html
+        #cookie_value = self.request.cookies.get('login_cookie')
+        #logging.info(cookie_value)
+
+        # self.response.delete_cookie('login_cookie')
+        self.response.set_cookie('login_cookie', value="", path="/")
+
+        # if self.request.cookies.get('login_cookie') == None or self.request.cookies.get('login_cookie') == "":
+        #     return webapp2.redirect('/')
+
+        logging.info("LOGOUT COOKIE DELETED")
+
+
 app = webapp2.WSGIApplication([
     ('/', MainPageHandler),
-    ('/terms_privacy', TermsPrivacyHandler)
+    ('/terms_privacy', TermsPrivacyHandler),
+    ('/logout', LogoutHandler),
+    ('/app', AppHandler)
 ], debug=True)
