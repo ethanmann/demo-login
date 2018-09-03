@@ -40,7 +40,12 @@ class TermsPrivacyHandler(webapp2.RequestHandler):
 
 class MainPageHandler(webapp2.RequestHandler):
     def get(self):
-        homePageMessage(self, "", "")
+        if self.request.cookies.get('login_cookie') == "":
+            homePageMessage(self, "", "")
+        else:
+            self.response.headers['Content-Type'] = 'text/html'
+            template = jinja_env.get_template('static/main_page_cookie.html')
+            self.response.write(template.render())
 
     def post(self):
         type = str(self.request.get('type'))
@@ -68,7 +73,10 @@ class MainPageHandler(webapp2.RequestHandler):
 
                 #plainTextResponse(self, "You have logged in! User email is %s" % (user.email))
                 #homePageMessage(self, "", "")
-                successMessage(self, "LOGIN")
+                #successMessage(self, "LOGIN")
+                self.response.headers['Content-Type'] = 'text/html'
+                template = jinja_env.get_template('static/login.html')
+                self.response.write(template.render())
 
         elif type == "signup":
             logging.info("signup")
@@ -98,8 +106,10 @@ class MainPageHandler(webapp2.RequestHandler):
 
                     #plainTextResponse(self, "You have successfully signed up!")
                     #homePageMessage(self, "", "You have successfully signed up!")
-                    successMessage(self, "SIGN UP")
-
+                    #successMessage(self, "SIGN UP")
+                    self.response.headers['Content-Type'] = 'text/html'
+                    template = jinja_env.get_template('static/login.html')
+                    self.response.write(template.render())
 
                 else:
                     #plainTextResponse(self, "The passwords you entered are not the same.")
