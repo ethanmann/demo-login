@@ -9,11 +9,11 @@ Home Page Layout: https://www.w3schools.com/w3css/tryw3css_templates_coming_soon
 
 # next steps
 <ol>
+<li>User Account page(s)</li>
 <li>Deploy to Cloud</li>
 <li>Gmail API</li>
 <li>Get GC key and send confirmation email</li>
 <li>Captcha</li>
 <li>Forgot Password</li>
-<li>User Account page(s)</li>
 <li>More TBD</li>
 </ol>

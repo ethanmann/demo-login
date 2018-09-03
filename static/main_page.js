@@ -1,17 +1,30 @@
 window.onload = main;
 var inputBoxes;
+var loginMessage;
+var signupMessage;
+var loginMessageDefault;
+var signupMessageDefault;
 
 function main(){
-  var hiddenAlert = document.getElementById('alertMessage');
-  if (hiddenAlert.value != ""){
-    alert(hiddenAlert.value);
-    hiddenAlert.value = "";
-  }
+  loginMessageDefault = "Please fill in this form to login.";
+  signupMessageDefault = "Please fill in this form to create an account.";
+
+  loginMessage = document.getElementById('loginMessage');
+  signupMessage = document.getElementById('signupMessage');
 
   inputBoxes = document.querySelectorAll("input");
   var signupModal = signupScript();
   var loginModal = loginScript();
   windowClick(signupModal, loginModal);
+
+  if (loginMessage.innerText != loginMessageDefault){
+    console.log(loginMessage.innerText);
+    loginModal.style.display='block';
+  }
+  else if (signupMessage.innerText != signupMessageDefault){
+    console.log(signupMessage.innerText);
+    signupModal.style.display='block';
+  }
 }
 
 function clearInput(){
@@ -23,6 +36,9 @@ function clearInput(){
       element.value="";
     }
   });
+
+  loginMessage.innerText=loginMessageDefault;
+  signupMessage.innerText=signupMessageDefault;
 }
 
 function windowClick(signupModal, loginModal){

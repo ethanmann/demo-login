@@ -28,8 +28,6 @@ body, html {height: 100%}
 </head>
 <body>
 
-<input type="hidden" id="alertMessage" value="{{message}}">
-
 <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
   <div class="w3-display-topleft w3-padding-large w3-xlarge">
     <a href="/">Home Page</a>
@@ -68,7 +66,7 @@ body, html {height: 100%}
 
     <div class="container1">
       <h1>Login</h1>
-      <p>Please fill in this form to login.</p>
+      <p id="loginMessage">{{loginMessage}}</p>
       <hr>
       <label for="uname"><b>Username</b></label>
       <input type="email" placeholder="Enter Email" name="email" required>
@@ -95,7 +93,7 @@ body, html {height: 100%}
     <input type="hidden" name="type" value="signup">
     <div class="container">
       <h1>Sign Up</h1>
-      <p>Please fill in this form to create an account.</p>
+      <p id="signupMessage">{{signupMessage}}</p>
       <hr>
       <label for="email"><b>Email</b></label>
       <input type="email" placeholder="Enter Email" name="email" required>

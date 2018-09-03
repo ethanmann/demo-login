@@ -13,8 +13,13 @@ def plainTextResponse(self, message):
     self.response.headers['Content-Type'] = 'text/plain'
     self.response.write(message)
 
-def homePageMessage(self, message):
-    data = {"message": message}
+def homePageMessage(self, loginMessage, signupMessage):
+    if len(loginMessage) == 0:
+        loginMessage = "Please fill in this form to login."
+    if len(signupMessage) == 0:
+        signupMessage = "Please fill in this form to create an account."
+
+    data = {"loginMessage": loginMessage, "signupMessage": signupMessage}
     self.response.headers['Content-Type'] = 'text/html'
     template = jinja_env.get_template('static/main_page.html')
     self.response.write(template.render(data))
@@ -28,7 +33,7 @@ class TermsPrivacyHandler(webapp2.RequestHandler):
 
 class MainPageHandler(webapp2.RequestHandler):
     def get(self):
-        homePageMessage(self, "")
+        homePageMessage(self, "", "")
 
     def post(self):
         type = str(self.request.get('type'))
@@ -45,12 +50,12 @@ class MainPageHandler(webapp2.RequestHandler):
 
             if len(results) == 0:
                 #plainTextResponse(self, "The combination of username and password does not exist")
-                homePageMessage(self, "Those credentials were invalid. Try again.")
+                homePageMessage(self, "Those credentials were invalid. Try again.", "")
 
             else:
                 user = results[0]
                 #plainTextResponse(self, "You have logged in! User email is %s" % (user.email))
-                homePageMessage(self, "You have logged in as user %s!" % (user.email))
+                homePageMessage(self, "", "")
 
         elif type == "signup":
             logging.info("signup")
@@ -61,7 +66,7 @@ class MainPageHandler(webapp2.RequestHandler):
 
             if len(results) > 0:
                 #plainTextResponse(self, "This email is already taken.")
-                homePageMessage(self, "This email is already taken. Try again.")
+                homePageMessage(self, "", "This email is already taken. Try again.")
 
             else:
                 psw = self.request.get('psw')
@@ -74,10 +79,10 @@ class MainPageHandler(webapp2.RequestHandler):
                     newUser.put()
 
                     #plainTextResponse(self, "You have successfully signed up!")
-                    homePageMessage(self, "You have successfully signed up!")
+                    homePageMessage(self, "", "You have successfully signed up!")
                 else:
                     #plainTextResponse(self, "The passwords you entered are not the same.")
-                    homePageMessage(self, "Your passwords didn't match. Try again.")
+                    homePageMessage(self, "", "Your passwords didn't match. Try again.")
 
 
 app = webapp2.WSGIApplication([
