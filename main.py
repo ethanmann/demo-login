@@ -161,25 +161,11 @@ class AppHandler(webapp2.RequestHandler):
 class LogoutHandler(webapp2.RequestHandler):
     def get(self):
         logging.info("LOGOUT GET")
-        LogoutHandler.post(self)
-        #can't logout on the get method
-
-        logging.info("MADE IT PAST POST BACK TO GET")
-        return webapp2.redirect('/')
-
-    def post(self):
-        logging.info("LOGOUT POST")
-        #https://webapp2.readthedocs.io/en/latest/guide/request.html
-        #cookie_value = self.request.cookies.get('login_cookie')
-        #logging.info(cookie_value)
-
         self.response.set_cookie('login_cookie', value="", path="/")
-        #self.response.delete_cookie('login_cookie')
 
-        # if self.request.cookies.get('login_cookie') == None or self.request.cookies.get('login_cookie') == "":
-        #     return webapp2.redirect('/')
-
-        logging.info("LOGOUT COOKIE DELETED")
+        self.response.headers['Content-Type'] = 'text/html'
+        template = jinja_env.get_template('static/logout.html')
+        self.response.write(template.render())
 
 
 app = webapp2.WSGIApplication([
