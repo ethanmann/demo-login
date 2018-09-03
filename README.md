@@ -42,4 +42,5 @@ https://website-login-demo.appspot.com/
   <li>App page - DONE</li>
   <li>Log out page that clears cookie value - DONE</li>
   <li>Log out page that goes home - DONE</li>
+  <li>Different home page if logged in</li>
 </ol>
