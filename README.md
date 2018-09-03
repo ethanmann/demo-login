@@ -42,5 +42,22 @@ https://website-login-demo.appspot.com/
   <li>App page - DONE</li>
   <li>Log out page that clears cookie value - DONE</li>
   <li>Log out page that goes home - DONE</li>
-  <li>Different home page if logged in</li>
+  <li>Different home page if logged in - DONE</li>
+</ol>
+
+# email
+<ol>
+  <li>Gitignore for credentials.json and token.json</li>
+  <li>Secret.py for hidden email address</li>
+  <li>Created dedicated email - DONE</li>
+  <li>Quickstart</li>
+  <li>Changed scope, authorized email, + made test email method w/ Handler - DONE</li>
+  <li>Appengine_config + vendored python lib - DONE</li>
+</ol>
+
+# todos
+<ol>
+<li>Add comments to code</li>
+<li>Figure out next steps</li>
+<li>List out resources used</li>
 </ol>

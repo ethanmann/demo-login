@@ -1,1 +1,4 @@
 *.pyc
+credentials.json
+token.json
+secret.py

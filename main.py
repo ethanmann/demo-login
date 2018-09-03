@@ -191,10 +191,15 @@ class LogoutHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('static/logout.html')
         self.response.write(template.render())
 
+class TestHandler(webapp2.RequestHandler):
+    def get(self):
+        import quickstart
+        quickstart.main()
 
 app = webapp2.WSGIApplication([
     ('/', MainPageHandler),
     ('/terms_privacy', TermsPrivacyHandler),
     ('/logout', LogoutHandler),
+    ('/test', TestHandler),
     ('/app', AppHandler)
 ], debug=True)
