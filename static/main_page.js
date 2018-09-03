@@ -1,9 +1,17 @@
 window.onload = main;
 var inputBoxes;
+
 var loginMessage;
 var signupMessage;
+
 var loginMessageDefault;
 var signupMessageDefault;
+
+var signupModal;
+var loginModal;
+
+var signupForm;
+var loginForm;
 
 function main(){
   loginMessageDefault = "Please fill in this form to login.";
@@ -12,10 +20,13 @@ function main(){
   loginMessage = document.getElementById('loginMessage');
   signupMessage = document.getElementById('signupMessage');
 
+  loginForm = document.getElementById('loginForm');
+  signupForm = document.getElementById('signupForm');
+
   inputBoxes = document.querySelectorAll("input");
-  var signupModal = signupScript();
-  var loginModal = loginScript();
-  windowClick(signupModal, loginModal);
+  signupModal = signupScript();
+  loginModal = loginScript();
+  windowClick();
 
   if (loginMessage.innerText != loginMessageDefault){
     console.log(loginMessage.innerText);
@@ -25,6 +36,17 @@ function main(){
     console.log(signupMessage.innerText);
     signupModal.style.display='block';
   }
+
+  window.onkeydown = (e) => {
+    if (e.keyCode == 13){
+      if (loginModal.style.display == 'block'){
+        loginForm.submit();
+      }
+      if (signupModal.style.display == 'block'){
+        signupForm.submit();
+      }
+    }
+  });
 }
 
 function clearInput(){
@@ -41,7 +63,7 @@ function clearInput(){
   signupMessage.innerText=signupMessageDefault;
 }
 
-function windowClick(signupModal, loginModal){
+function windowClick(){
   // When the user clicks anywhere outside of the modal, close it + clear input
   window.onclick = function(event) {
       if (event.target == signupModal) {

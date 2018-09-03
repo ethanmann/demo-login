@@ -24,6 +24,13 @@ def homePageMessage(self, loginMessage, signupMessage):
     template = jinja_env.get_template('static/main_page.html')
     self.response.write(template.render(data))
 
+def successMessage(self, type):
+    data = {"TYPE": type}
+    self.response.headers['Content-Type'] = 'text/html'
+    template = jinja_env.get_template('static/success.html')
+    self.response.write(template.render(data))
+
+
 class TermsPrivacyHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
@@ -55,7 +62,8 @@ class MainPageHandler(webapp2.RequestHandler):
             else:
                 user = results[0]
                 #plainTextResponse(self, "You have logged in! User email is %s" % (user.email))
-                homePageMessage(self, "", "")
+                #homePageMessage(self, "", "")
+                successMessage(self, "LOGIN")
 
         elif type == "signup":
             logging.info("signup")
@@ -79,7 +87,10 @@ class MainPageHandler(webapp2.RequestHandler):
                     newUser.put()
 
                     #plainTextResponse(self, "You have successfully signed up!")
-                    homePageMessage(self, "", "You have successfully signed up!")
+                    #homePageMessage(self, "", "You have successfully signed up!")
+                    successMessage(self, "SIGN UP")
+
+
                 else:
                     #plainTextResponse(self, "The passwords you entered are not the same.")
                     homePageMessage(self, "", "Your passwords didn't match. Try again.")
