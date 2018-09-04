@@ -194,9 +194,9 @@ class LogoutHandler(webapp2.RequestHandler):
 class TestHandler(webapp2.RequestHandler):
     def get(self):
         import secret
-        import email
+        import email_methods
 
-        email.email(secret.my_email, "TEST SUBJECT", "TEST MESSAGE TEXT")
+        email_methods.email(secret.my_email, "TEST SUBJECT", "TEST MESSAGE TEXT")
 
 app = webapp2.WSGIApplication([
     ('/', MainPageHandler),
