@@ -45,6 +45,8 @@ https://website-login-demo.appspot.com/
   <li>Different home page if logged in - DONE</li>
   <li>Remove cookie from sign up</li>
   <li>Create link to confirm account + create handler for access</li>
+  <li>Datastore field (account_confirmed boolean), add condition to check</li>
+  <li>Option to report (I didn't enter this email, erase account)</li>
 </ol>
 
 # email
@@ -58,8 +60,11 @@ https://website-login-demo.appspot.com/
   <li>Send email after new user sign up</li>
 </ol>
 
-# todos
+# urgent and not urgent todos
 <ol>
+<li>Deploy as test</li>
+<li>Add separate cyphers to key (cookie value, confirmation url)</li>
+<li>Change cookie name + other cookie details (HTTPS secure)</li>
 <li>Add comments to code</li>
 <li>Figure out next steps</li>
 <li>List out resources used</li>
