@@ -81,4 +81,5 @@ Offline temporarily, but will be back up soon!
 <li>List out resources used</li>
 <li>Clean datastore</li>
 <li>TEST!</li>
+<li>See if I can make it faster</li>
 </ol>
