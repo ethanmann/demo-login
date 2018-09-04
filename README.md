@@ -34,6 +34,7 @@ Offline temporarily, but will be back up soon!
   <li>Captcha</li>
   <li>Forgot Password</li>
   <li>More TBD</li>
+  <li>Add accurate HTML titles (tab headers)</li>
 </ol>
 
 # login credentials
