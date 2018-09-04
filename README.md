@@ -49,8 +49,8 @@ https://website-login-demo.appspot.com/
 
 # email
 <ol>
-  <li>Gitignore for credentials.json and token.json</li>
-  <li>Secret.py for hidden email address</li>
+  <li>Gitignore for credentials.json and token.json - DONE</li>
+  <li>Secret.py for hidden email address - DONE</li>
   <li>Created dedicated email - DONE</li>
   <li>Quickstart - DONE</li>
   <li>Changed scope, authorized email, + made test email method w/ Handler - DONE</li>
