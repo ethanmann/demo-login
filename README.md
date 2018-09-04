@@ -12,30 +12,30 @@ https://website-login-demo.appspot.com/
 
 # progress + next steps
 <ol>
-<li>Forms and post method - DONE</li>
-<li>Password bullet points instead of char - DONE</li>
-<li>Site layout/structure + datastore - DONE</li>
-<li>Terms & Privacy page - DONE</li>
-<li>Server-generated Error checking - DONE</li>
-<li>Server-generated Error alerts - DONE</li>
-<li>HTML5-generated error checking + alerts - DONE</li>
-<li>Form submit on enter (without HTML5 errors checking) - DONE</li>
-<li>Form submit on enter (with HTML5 errors checking) - DONE</li>
-<li>Success page - DONE</li>
-<li>Form data carry through after failed attempt</li>
-<li>JS Client-generated Error checking (include password = password???)</li>
-<li>JS Client-generated Error alerts</li>
-<li>Password requirements -> length, etc.</li>
-<li>User Account page(s)</li>
-<li>Deploy to Cloud</li>
-<li>Gmail API</li>
-<li>Get GC key and send confirmation email</li>
-<li>Captcha</li>
-<li>Forgot Password</li>
-<li>More TBD</li>
+  <li>Forms and post method - DONE</li>
+  <li>Password bullet points instead of char - DONE</li>
+  <li>Site layout/structure + datastore - DONE</li>
+  <li>Terms & Privacy page - DONE</li>
+  <li>Server-generated Error checking - DONE</li>
+  <li>Server-generated Error alerts - DONE</li>
+  <li>HTML5-generated error checking + alerts - DONE</li>
+  <li>Form submit on enter (without HTML5 errors checking) - DONE</li>
+  <li>Form submit on enter (with HTML5 errors checking) - DONE</li>
+  <li>Success page - DONE</li>
+  <li>Form data carry through after failed attempt</li>
+  <li>JS Client-generated Error checking (include password = password???)</li>
+  <li>JS Client-generated Error alerts</li>
+  <li>Password requirements -> length, etc.</li>
+  <li>User Account page(s)</li>
+  <li>Deploy to Cloud</li>
+  <li>Gmail API</li>
+  <li>Get GC key and send confirmation email</li>
+  <li>Captcha</li>
+  <li>Forgot Password</li>
+  <li>More TBD</li>
 </ol>
 
-# tangent
+# login credentials
 <ol>
   <li>Storing Cookie on user's computer after signup or login - DONE</li>
   <li>Requiring Cookie to view APP page - DONE</li>
@@ -43,6 +43,8 @@ https://website-login-demo.appspot.com/
   <li>Log out page that clears cookie value - DONE</li>
   <li>Log out page that goes home - DONE</li>
   <li>Different home page if logged in - DONE</li>
+  <li>Remove cookie from sign up</li>
+  <li>Create link to confirm account + create handler for access</li>
 </ol>
 
 # email
@@ -50,9 +52,10 @@ https://website-login-demo.appspot.com/
   <li>Gitignore for credentials.json and token.json</li>
   <li>Secret.py for hidden email address</li>
   <li>Created dedicated email - DONE</li>
-  <li>Quickstart</li>
+  <li>Quickstart - DONE</li>
   <li>Changed scope, authorized email, + made test email method w/ Handler - DONE</li>
   <li>Appengine_config + vendored python lib - DONE</li>
+  <li>Send email after new user sign up</li>
 </ol>
 
 # todos
