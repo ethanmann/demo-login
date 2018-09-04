@@ -8,7 +8,8 @@ Login Form: https://www.w3schools.com/howto/howto_css_login_form.asp
 Home Page Layout: https://www.w3schools.com/w3css/tryw3css_templates_coming_soon.htm
 
 # Live Site
-https://website-login-demo.appspot.com/
+<!-- https://website-login-demo.appspot.com/ -->
+Offline temporarily, but will be back up soon!
 
 # progress + next steps
 <ol>
@@ -47,9 +48,12 @@ https://website-login-demo.appspot.com/
   <li>Create link to confirm account + create handler for access - DONE</li>
   <li>Datastore field (account_confirmed boolean), add condition to check - DONE</li>
   <li>Added urlSafe encryption from datastore - DONE</li>
-  <li>Create unique session id's (that expire after new id created/time period up) instead of using same session id</li>
+  <li>Create unique session id's (that overwrite local cookies after new id created/time period up) instead of using same session id</li>
   <li>Ensure session id is unique by adding a user-unique string</li>
-  <li>Extra level of encryption? -> in urgent/not urgent section</li>
+  <li>Accommodate logins from several computers at once by having list of current session id's in datastore</li>
+  <li>Let a user log out of all other sessions (like gmail)</li>
+  <li>Extra level of encryption -> in urgent/not urgent section</li>
+  <li>Add message for session requests that are no longer active -> some type of redirect/login prompt/handling</li>
   <li>Have confirm emails expire after a period of time (datastore + handler code)</li>
   <li>Option to report (I didn't enter this email, erase account)</li>
 </ol>
