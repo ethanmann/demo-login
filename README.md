@@ -51,6 +51,7 @@ Offline temporarily, but will be back up soon!
   <li>Added urlSafe encryption from datastore - DONE</li>
   <li>Create unique session id's (that overwrite local cookies after new id created/time period up) instead of using same session id</li>
   <li>Ensure session id is unique by adding a user-unique string</li>
+  <li>Make sure session ids aren't used twice accidentally by including a counter as the first part of the string, form = "COUNT_encrypted(USERID)_LONG-RANDOM", and add a current count var in datastore</li>
   <li>Accommodate logins from several computers at once by having list of current session id's in datastore</li>
   <li>Let a user log out of all other sessions (like gmail)</li>
   <li>Extra level of encryption -> in urgent/not urgent section</li>
