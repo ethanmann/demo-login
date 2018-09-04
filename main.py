@@ -3,6 +3,7 @@ import logging
 import jinja2
 import os
 import database
+from google.appengine.ext import ndb
 
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -43,12 +44,14 @@ class MainPageHandler(webapp2.RequestHandler):
         if cookie_value == "" or cookie_value == None:
             homePageMessage(self, "", "")
         else:
-            all_users = database.User.query().fetch()
-            user_entity = None
-            for user in all_users:
-                if str(user.key) == cookie_value:
-                    user_entity = user
-                    break
+            key_object = ndb.Key(urlsafe=cookie_value)
+            user_entity = key_object.get()
+            # all_users = database.User.query().fetch()
+            # user_entity = None
+            # for user in all_users:
+            #     if str(user.key) == cookie_value:
+            #         user_entity = user
+            #         break
 
             self.response.headers['Content-Type'] = 'text/html'
             template = jinja_env.get_template('static/main_page_cookie.html')
@@ -74,7 +77,11 @@ class MainPageHandler(webapp2.RequestHandler):
             else:
                 user = results[0]
                 if user.emailConfirmed:
-                    datastore_key = str(user.put())
+                    #https://cloud.google.com/appengine/docs/standard/python/ndb/creating-entities
+                    #https://cloud.google.com/appengine/docs/standard/python/datastore/entities#Python_Understanding_write_costs
+                    #SHOULD MINIMIZE # OF PUT OPERATIONS
+
+                    datastore_key = user.key.urlsafe()
                     self.response.set_cookie('login_cookie', value=datastore_key, path="/")
                     #self.response.set_cookie('login_cookie', key, path='/app',domain='website-login-demo.appspot.com', secure=True)
                     #https://webapp2.readthedocs.io/en/latest/guide/response.html
@@ -87,8 +94,6 @@ class MainPageHandler(webapp2.RequestHandler):
                     self.response.write(template.render({"location":"/app"}))
 
                 else:
-                    datastore_key = str(user.put())
-                    email = user.email
                     homePageMessage(self, "You still need to confirm your account. Check your email for a link.", "")
 
         elif type == "signup":
@@ -110,7 +115,8 @@ class MainPageHandler(webapp2.RequestHandler):
                     remember = self.request.get('remember')
 
                     newUser = database.User(email=email, password=psw, listOfWords=[], emailConfirmed=False)
-                    datastore_key = str(newUser.put())
+                    datastore_key = newUser.put().urlsafe()
+
                     #https://cloud.google.com/appengine/docs/standard/python/ndb/creating-entities
 
                     #plainTextResponse(self, "You have successfully signed up!")
@@ -146,14 +152,14 @@ class AppHandler(webapp2.RequestHandler):
             return webapp2.redirect('/')
 
         #https://cloud.google.com/appengine/docs/standard/python/ndb/creating-entities
-        all_users = database.User.query().fetch()
-        user_entity = None
-        for user in all_users:
-            logging.info(str(user.key))
-            if str(user.key) == cookie_value:
-                user_entity = user
-                break
-
+        key_object = ndb.Key(urlsafe=cookie_value)
+        user_entity = key_object.get()
+        # all_users = database.User.query().fetch()
+        # user_entity = None
+        # for user in all_users:
+        #     if str(user.key) == cookie_value:
+        #         user_entity = user
+        #         break
         logging.info(user_entity)
 
         data = {}
@@ -172,12 +178,14 @@ class AppHandler(webapp2.RequestHandler):
         cookie_value = self.request.cookies.get('login_cookie')
         logging.info(cookie_value)
 
-        all_users = database.User.query().fetch()
-        user_entity = None
-        for user in all_users:
-            if str(user.key) == cookie_value:
-                user_entity = user
-                break
+        key_object = ndb.Key(urlsafe=cookie_value)
+        user_entity = key_object.get()
+        # all_users = database.User.query().fetch()
+        # user_entity = None
+        # for user in all_users:
+        #     if str(user.key) == cookie_value:
+        #         user_entity = user
+        #         break
 
         if clear == "YES":
             user_entity.listOfWords = []
@@ -211,12 +219,14 @@ class ConfirmHandler(webapp2.RequestHandler):
             self.response.write(template.render())
 
         else:
-            all_users = database.User.query().fetch()
-            user_entity = None
-            for user in all_users:
-                if str(user.key) == key:
-                    user_entity = user
-                    break
+            key_object = ndb.Key(urlsafe=key)
+            user_entity = key_object.get()
+            # all_users = database.User.query().fetch()
+            # user_entity = None
+            # for user in all_users:
+            #     if str(user.key) == key:
+            #         user_entity = user
+            #         break
 
             user_entity.emailConfirmed = True
             user_entity.put()

@@ -46,6 +46,10 @@ https://website-login-demo.appspot.com/
   <li>Remove cookie from sign up - DONE</li>
   <li>Create link to confirm account + create handler for access - DONE</li>
   <li>Datastore field (account_confirmed boolean), add condition to check - DONE</li>
+  <li>Added urlSafe encryption from datastore - DONE</li>
+  <li>Create unique session id's (that expire after new id created/time period up) instead of using same session id</li>
+  <li>Ensure session id is unique by adding a user-unique string</li>
+  <li>Extra level of encryption? -> in urgent/not urgent section</li>
   <li>Have confirm emails expire after a period of time (datastore + handler code)</li>
   <li>Option to report (I didn't enter this email, erase account)</li>
 </ol>
@@ -65,7 +69,7 @@ https://website-login-demo.appspot.com/
 # urgent and not urgent todos
 <ol>
 <li>Deploy as test</li>
-<li>Add encryption to key (cookie value, confirmation url) in hidden python file</li>
+<li>Add extra encryption to key (cookie value, confirmation url) in hidden python file "secret.py"</li>
 <li>Change cookie name + other cookie details (HTTPS secure)</li>
 <li>Add comments to code</li>
 <li>Figure out next steps</li>
