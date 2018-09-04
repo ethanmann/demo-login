@@ -193,8 +193,10 @@ class LogoutHandler(webapp2.RequestHandler):
 
 class TestHandler(webapp2.RequestHandler):
     def get(self):
-        import quickstart
-        quickstart.main()
+        import secret
+        import email
+
+        email.email(secret.my_email, "TEST SUBJECT", "TEST MESSAGE TEXT")
 
 app = webapp2.WSGIApplication([
     ('/', MainPageHandler),

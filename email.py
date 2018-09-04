@@ -12,15 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import print_function
+# from __future__ import print_function
 from googleapiclient.discovery import build
 from httplib2 import Http
 from oauth2client import file, client, tools
+import logging
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = 'https://www.googleapis.com/auth/gmail.send'
 
-def main():
+def email(recipient, subject, message):
     """Shows basic usage of the Gmail API.
     Lists the user's Gmail labels.
     """
@@ -44,11 +45,8 @@ def main():
 
     service = build('gmail', 'v1', http=creds.authorize(Http()))
 
-    # Get secret info (my email)
-    import secret
-
     # Call the Gmail API
-    message = create_message("windowlogindemo@gmail.com", secret.my_email, "TEST SUBJECT", "TEST MESSAGE TEXT")
+    message = create_message("windowlogindemo@gmail.com", recipient, subject, message)
     send_message(service, "me", message)
 
 # [END gmail_quickstart]
@@ -91,11 +89,7 @@ def send_message(service, user_id, message):
   try:
     message = (service.users().messages().send(userId=user_id, body=message)
                .execute())
-    print('Message Id: %s' % message['id'])
+    logging.info('Message Id: %s' % message['id'])
     return message
   except errors.HttpError, error:
-    print('An error occurred: %s' % error)
-
-
-# if __name__ == '__main__':
-#     main()
+    logging.info('An error occurred: %s' % error)
