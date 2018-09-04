@@ -24,12 +24,11 @@ def homePageMessage(self, loginMessage, signupMessage):
     template = jinja_env.get_template('static/main_page.html')
     self.response.write(template.render(data))
 
-def successMessage(self, type):
-    data = {"TYPE": type}
-    self.response.headers['Content-Type'] = 'text/html'
-    template = jinja_env.get_template('static/success.html')
-    self.response.write(template.render(data))
-
+# def successMessage(self, type):
+#     data = {"TYPE": type}
+#     self.response.headers['Content-Type'] = 'text/html'
+#     template = jinja_env.get_template('static/success.html')
+#     self.response.write(template.render(data))
 
 class TermsPrivacyHandler(webapp2.RequestHandler):
     def get(self):
@@ -74,17 +73,23 @@ class MainPageHandler(webapp2.RequestHandler):
 
             else:
                 user = results[0]
+                if user.emailConfirmed:
+                    datastore_key = str(user.put())
+                    self.response.set_cookie('login_cookie', value=datastore_key, path="/")
+                    #self.response.set_cookie('login_cookie', key, path='/app',domain='website-login-demo.appspot.com', secure=True)
+                    #https://webapp2.readthedocs.io/en/latest/guide/response.html
 
-                # SEE COOKIE COMMENTS BELOW FOR SIGNUP SECTION
-                datastore_key = str(user.put())
-                self.response.set_cookie('login_cookie', value=datastore_key, path="/")
+                    #plainTextResponse(self, "You have logged in! User email is %s" % (user.email))
+                    #homePageMessage(self, "", "")
+                    #successMessage(self, "LOGIN")
+                    self.response.headers['Content-Type'] = 'text/html'
+                    template = jinja_env.get_template('static/script.html')
+                    self.response.write(template.render({"location":"/app"}))
 
-                #plainTextResponse(self, "You have logged in! User email is %s" % (user.email))
-                #homePageMessage(self, "", "")
-                #successMessage(self, "LOGIN")
-                self.response.headers['Content-Type'] = 'text/html'
-                template = jinja_env.get_template('static/login.html')
-                self.response.write(template.render())
+                else:
+                    datastore_key = str(user.put())
+                    email = user.email
+                    homePageMessage(self, "You still need to confirm your account. Check your email for a link.", "")
 
         elif type == "signup":
             logging.info("signup")
@@ -104,23 +109,26 @@ class MainPageHandler(webapp2.RequestHandler):
                 if (psw == psw_repeat):
                     remember = self.request.get('remember')
 
-                    newUser = database.User(email=email, password=psw, listOfWords=[])
+                    newUser = database.User(email=email, password=psw, listOfWords=[], emailConfirmed=False)
                     datastore_key = str(newUser.put())
                     #https://cloud.google.com/appengine/docs/standard/python/ndb/creating-entities
-
-                    #self.response.set_cookie('login_cookie', key, path='/app',domain='website-login-demo.appspot.com', secure=True)
-                    self.response.set_cookie('login_cookie', value=datastore_key, path="/")
-                    #https://webapp2.readthedocs.io/en/latest/guide/response.html
 
                     #plainTextResponse(self, "You have successfully signed up!")
                     #homePageMessage(self, "", "You have successfully signed up!")
                     #successMessage(self, "SIGN UP")
 
-                    import time
-                    time.sleep(1)
+                    # import time
+                    # time.sleep(1)
+
+
+                    import email_methods
+                    link = self.request.application_url + "/confirm?key=" + datastore_key
+                    #https://docs.pylonsproject.org/projects/webob/en/stable/
+                    email_methods.email(email, "Website Login Demo - Account Confirmation", "Click here to confirm your account: %s" % link)
+
 
                     self.response.headers['Content-Type'] = 'text/html'
-                    template = jinja_env.get_template('static/login.html')
+                    template = jinja_env.get_template('static/confirmation_sent.html')
                     self.response.write(template.render())
 
                 else:
@@ -188,20 +196,47 @@ class LogoutHandler(webapp2.RequestHandler):
         self.response.set_cookie('login_cookie', value="", path="/")
 
         self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('static/logout.html')
-        self.response.write(template.render())
+        template = jinja_env.get_template('static/script.html')
+        self.response.write(template.render({"location":"/"}))
 
-class TestHandler(webapp2.RequestHandler):
+class ConfirmHandler(webapp2.RequestHandler):
     def get(self):
-        import secret
-        import email_methods
+        key = self.request.get('key')
+        # self.response.set_cookie('login_cookie', value=key, path="/")
+        # Doesn't set cookie to force user to log in -> security
 
-        email_methods.email(secret.my_email, "TEST SUBJECT", "TEST MESSAGE TEXT")
+        if key == None or key == "":
+            self.response.headers['Content-Type'] = 'text/html'
+            template = jinja_env.get_template('static/confirmation_received.html')
+            self.response.write(template.render())
+
+        else:
+            all_users = database.User.query().fetch()
+            user_entity = None
+            for user in all_users:
+                if str(user.key) == key:
+                    user_entity = user
+                    break
+
+            user_entity.emailConfirmed = True
+            user_entity.put()
+
+            return webapp2.redirect('/confirm')
+            #This masks the url from the user
+
+
+# class TestHandler(webapp2.RequestHandler):
+#     def get(self):
+#         import secret
+#         import email_methods
+#
+#         email_methods.email(secret.my_email, "TEST SUBJECT", "TEST MESSAGE TEXT")
 
 app = webapp2.WSGIApplication([
     ('/', MainPageHandler),
     ('/terms_privacy', TermsPrivacyHandler),
     ('/logout', LogoutHandler),
+    ('/confirm', ConfirmHandler),
     #('/test', TestHandler),
     ('/app', AppHandler)
 ], debug=True)

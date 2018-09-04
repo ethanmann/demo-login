@@ -27,9 +27,9 @@ https://website-login-demo.appspot.com/
   <li>JS Client-generated Error alerts</li>
   <li>Password requirements -> length, etc.</li>
   <li>User Account page(s)</li>
-  <li>Deploy to Cloud</li>
-  <li>Gmail API</li>
-  <li>Get GC key and send confirmation email</li>
+  <li>Deploy to Cloud - DONE</li>
+  <li>Gmail API - DONE</li>
+  <li>Get GC key and send confirmation email - DONE</li>
   <li>Captcha</li>
   <li>Forgot Password</li>
   <li>More TBD</li>
@@ -43,9 +43,10 @@ https://website-login-demo.appspot.com/
   <li>Log out page that clears cookie value - DONE</li>
   <li>Log out page that goes home - DONE</li>
   <li>Different home page if logged in - DONE</li>
-  <li>Remove cookie from sign up</li>
-  <li>Create link to confirm account + create handler for access</li>
-  <li>Datastore field (account_confirmed boolean), add condition to check</li>
+  <li>Remove cookie from sign up - DONE</li>
+  <li>Create link to confirm account + create handler for access - DONE</li>
+  <li>Datastore field (account_confirmed boolean), add condition to check - DONE</li>
+  <li>Have confirm emails expire after a period of time (datastore + handler code)</li>
   <li>Option to report (I didn't enter this email, erase account)</li>
 </ol>
 
@@ -58,13 +59,13 @@ https://website-login-demo.appspot.com/
   <li>Changed scope, authorized email, + made test email method w/ Handler (locally) - DONE</li>
   <li>Appengine_config + vendored python lib (locally) - DONE</li>
   <li>Email ^^ setup tweaked so credentials can be read online (not locally) - DONE</li>
-  <li>Send email after new user sign up</li>
+  <li>Send email after new user sign up< - DONE/li>
 </ol>
 
 # urgent and not urgent todos
 <ol>
 <li>Deploy as test</li>
-<li>Add separate cyphers to key (cookie value, confirmation url)</li>
+<li>Add encryption to key (cookie value, confirmation url) in hidden python file</li>
 <li>Change cookie name + other cookie details (HTTPS secure)</li>
 <li>Add comments to code</li>
 <li>Figure out next steps</li>
