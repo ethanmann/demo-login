@@ -67,7 +67,7 @@ Offline temporarily, but will be back up soon!
   <li>Changed scope, authorized email, + made test email method w/ Handler (locally) - DONE</li>
   <li>Appengine_config + vendored python lib (locally) - DONE</li>
   <li>Email ^^ setup tweaked so credentials can be read online (not locally) - DONE</li>
-  <li>Send email after new user sign up< - DONE/li>
+  <li>Send email after new user sign up - DONE</li>
 </ol>
 
 # urgent and not urgent todos
