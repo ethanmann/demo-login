@@ -55,8 +55,9 @@ https://website-login-demo.appspot.com/
   <li>Secret.py for hidden email address - DONE</li>
   <li>Created dedicated email - DONE</li>
   <li>Quickstart - DONE</li>
-  <li>Changed scope, authorized email, + made test email method w/ Handler - DONE</li>
-  <li>Appengine_config + vendored python lib - DONE</li>
+  <li>Changed scope, authorized email, + made test email method w/ Handler (locally) - DONE</li>
+  <li>Appengine_config + vendored python lib (locally) - DONE</li>
+  <li>Email ^^ setup tweaked so credentials can be read online (not locally) - DONE</li>
   <li>Send email after new user sign up</li>
 </ol>
 
