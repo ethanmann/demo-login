@@ -78,4 +78,6 @@ Offline temporarily, but will be back up soon!
 <li>Add comments to code</li>
 <li>Figure out next steps</li>
 <li>List out resources used</li>
+<li>Clean datastore</li>
+<li>TEST!</li>
 </ol>
