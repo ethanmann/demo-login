@@ -202,6 +202,6 @@ app = webapp2.WSGIApplication([
     ('/', MainPageHandler),
     ('/terms_privacy', TermsPrivacyHandler),
     ('/logout', LogoutHandler),
-    ('/test', TestHandler),
+    #('/test', TestHandler),
     ('/app', AppHandler)
 ], debug=True)
