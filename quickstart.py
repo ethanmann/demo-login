@@ -24,11 +24,24 @@ def main():
     """Shows basic usage of the Gmail API.
     Lists the user's Gmail labels.
     """
-    store = file.Storage('token.json')
-    creds = store.get()
-    if not creds or creds.invalid:
-        flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
-        creds = tools.run_flow(flow, store)
+    # store = file.Storage('token.json')
+    # creds = store.get()
+    # if not creds or creds.invalid:
+    #     flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
+    #     creds = tools.run_flow(flow, store)
+
+    # BEGIN APPENGINE CREDENTIALS CODE
+    filename = "token.json"
+    file = open(filename, "r")
+
+    jsonString = ""
+    for line in file:
+        jsonString += line
+
+    # https://oauth2client.readthedocs.io/en/latest/source/oauth2client.client.html#oauth2client.client.Credentials
+    creds = client.Credentials.new_from_json(jsonString)
+    # END APPENGINE CREDENTIALS CODE
+
     service = build('gmail', 'v1', http=creds.authorize(Http()))
 
     # Get secret info (my email)
