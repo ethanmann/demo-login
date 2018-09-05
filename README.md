@@ -84,3 +84,9 @@ Offline temporarily, but will be back up soon!
 <li>TEST!</li>
 <li>See if I can make it faster</li>
 </ol>
+
+# encryption resources
+https://security.stackexchange.com/questions/72836/are-passwords-stored-in-the-cookie-encrypted
+http://www.theitstuff.com/sessions-cookies-user-login-work
+https://stackoverflow.com/questions/5905646/faking-session-cookies
+https://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits-in-python
