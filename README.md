@@ -53,6 +53,7 @@ Offline temporarily, but will be back up soon!
   <li>Ensure session id is unique by adding a user-unique string</li>
   <li>Make sure session ids aren't used twice accidentally by including a counter as the first part of the string, form = "COUNT_encrypted(USERID)_LONG-RANDOM", and add a current count var in datastore</li>
   <li>Accommodate logins from several computers at once by having list of current session id's in datastore</li>
+  <li>Local Remember Me option -> do it with a Cookie</li>
   <li>Let a user log out of all other sessions (like gmail)</li>
   <li>Extra level of encryption -> in urgent/not urgent section</li>
   <li>Add message for session requests that are no longer active -> some type of redirect/login prompt/handling</li>
